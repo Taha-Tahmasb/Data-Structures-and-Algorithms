@@ -1,0 +1,31 @@
+import time
+
+def time_wrapper_fibonacci(n: int):
+    start_time = time.time()
+    dp_fibo_result = dp_fiobo(n+2)[::-1][0]
+    dp_fibo_time = time.time() - start_time
+    
+    start_time = time.time()
+    normal_fib_result = normal_fib(n)
+    normal_fib_time = time.time() - start_time
+    
+    print(f"Dynamic Programming Fibonacci result: {dp_fibo_result}")
+    print(f"Time taken by dp_fiobo: {dp_fibo_time:.6f} seconds")
+    
+    print(f"Normal Recursive Fibonacci result: {normal_fib_result}")
+    print(f"Time taken by normal_fib: {normal_fib_time:.6f} seconds")
+
+def dp_fiobo(n: int):
+    fib = [0, 1] + [0]*(n-2)
+    for i in range(2, n):
+        fib[i] = fib[i - 1] + fib[i - 2]
+    return fib
+
+def normal_fib(n: int):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return normal_fib(n-1) + normal_fib(n-2)
+
+n = int(input())
+time_wrapper_fibonacci(n)
